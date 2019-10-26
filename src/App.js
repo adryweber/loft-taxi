@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Menu } from "./shared/menu";
+import { Login } from "./login";
+import { SignUp } from "./signup";
+import { Map } from "./map";
+import { Profile } from "./profile";
+
+const Pages = {
+    login: setPage => <Login setPage={setPage} />,
+    signup: setPage => <SignUp setPage={setPage} />,
+    map: () => <Map />,
+    profile: () => <Profile />
+};
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [page, setPage] = React.useState("login");
+    return (
+        <>
+            <Menu setPage={setPage} />
+            {Pages[page](setPage)}
+        </>
+    );
 }
 
 export default App;
