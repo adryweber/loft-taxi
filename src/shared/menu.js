@@ -1,10 +1,11 @@
 import React from "react";
-import { Consumer } from "../shared/auth-context";
+import { AuthContext } from "../shared/auth-context";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import { Logo } from "loft-taxi-mui-theme";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     rootWrapper: {
@@ -21,40 +22,48 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Menu = ({ setPage }) => {
+const Menu = () => {
     const classes = useStyles();
 
     return (
-        <Consumer>
-            {({ isLoggedIn, logout }) => (
+        <AuthContext>
+            {({ isLoggedIn }) => (
                 <AppBar position="fixed" className={classes.rootWrapper}>
                     <div className={classes.root}>
                         <div className={classes.logo}>
-                            <Logo />
+                            <Link to="/">
+                                <Logo />
+                            </Link>
                         </div>
 
                         <Toolbar variant="dense">
-                            <Button onClick={() => setPage("map")}>Map</Button>
-                            <Button onClick={() => setPage("profile")}>
-                                Profile
-                            </Button>
                             {isLoggedIn ? (
-                                <Button onClick={() => logout()}>Logout</Button>
+                                <>
+                                    <Link to="/">
+                                        <Button>Map</Button>
+                                    </Link>
+                                    <Link to="/profile">
+                                        <Button>Profile</Button>
+                                    </Link>
+                                    <Link to="/logout">
+                                        <Button>Logout</Button>
+                                    </Link>
+                                </>
                             ) : (
                                 <>
-                                    <Button onClick={() => setPage("login")}>
-                                        Login
-                                    </Button>
-                                    <Button onClick={() => setPage("signup")}>
-                                        SignUp
-                                    </Button>
+                                    <Link to="/login">
+                                        <Button>Login</Button>
+                                    </Link>
+                                    <Link to="/signup">
+                                        <Button>SignUp</Button>
+                                    </Link>
                                 </>
                             )}
                         </Toolbar>
                     </div>
                 </AppBar>
             )}
-        </Consumer>
+        </AuthContext>
     );
 };
 

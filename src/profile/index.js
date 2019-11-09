@@ -4,7 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 
 import { MapBG } from "../shared/map-bg";
-import { CardForm } from "./cardForm";
+import { CardForm } from "./form/cardForm";
 import { useStyles } from "../shared/style";
 
 export const Profile = () => {

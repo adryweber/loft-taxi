@@ -1,15 +1,20 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 
-import { SignUpForm } from "./signUpForm";
+import { SignUpForm } from "./form/signUpForm";
 import { PageTemplateOne } from "../shared/page-template";
 
 import { useStyles } from "../shared/style";
 
-export const SignUp = ({ setPage }) => {
+export const SignUp = ({ isLoggedIn }) => {
     const classes = useStyles();
+
+    if (isLoggedIn) {
+        return <Redirect to="/map" />;
+    }
 
     return (
         <PageTemplateOne>
@@ -18,13 +23,10 @@ export const SignUp = ({ setPage }) => {
                     Регистрация
                 </Typography>
                 <div className={classes.formWrapper}>
-                    <SignUpForm setPage={setPage} />
+                    <SignUpForm />
                 </div>
                 <Typography variant="body2" component="span">
-                    <Link href="#" onClick={() => setPage("login")}>
-                        Войдите
-                    </Link>
-                    , если вы уже зарегистрированы.
+                    <Link href="#">Войдите</Link>, если вы уже зарегистрированы.
                 </Typography>
             </Paper>
         </PageTemplateOne>

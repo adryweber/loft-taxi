@@ -1,18 +1,17 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { useStyles } from "../shared/style";
+import { useStyles } from "../../shared/style";
 
-export const SignUpForm = ({ setPage }) => {
+export const SignUpForm = ({ signUp }) => {
     const classes = useStyles();
 
     const onSubmit = e => {
-        e.preventDefault();
-        setPage("profile");
+        // e.preventDefault();
     };
 
     return (
-        <form>
+        <form onSubmit={onSubmit()}>
             <TextField fullWidth id="email" label="Эл. почта" margin="normal" />
             <TextField fullWidth id="firstname" label="Имя" margin="normal" />
             <TextField
@@ -24,7 +23,6 @@ export const SignUpForm = ({ setPage }) => {
             <TextField fullWidth id="password" label="Пароль" margin="normal" />
             <Button
                 fullWidth
-                onClick={onSubmit}
                 className={classes.formBottomButton}
                 variant="contained"
                 color="primary"
